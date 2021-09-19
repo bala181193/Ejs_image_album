@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Album</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Add Album <Form>
+    </h2>
+    <h3 id="msg" style="color: red;"></h3>
+    <a href="/album_name_list">View Album List</a>
+    <form method="Post" enctype="multipart/form-data">
+      <input type="hidden" id="user_id" value="">
+      <div class="form-group">
+        <label for="username">Album Name</label>
+        <input type="text" class="form-control" id="name" value="" placeholder="Album Name" name="name">
+        <span id="err" style="color: red;"></span>
+      </div>
+      <div class="form-group">
+        <label for="username">Upload Image</label>
+        <input type="file" class="form-control" multiple id="image" value="" placeholder="AddImage" name="image">
+        <span id="err" style="color: red;"></span>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </div>
+
+</body>
+
+</html>
+
+
+<script>
+  $(document).ready(() => {
+    $('form').on('submit', (e) => {
+      e.preventDefault();
+      
+      var formdata = new FormData();
+      formdata.append('name', $('#name').val());
+      formdata.append('image', $('#image')[0].files[0]);
+      $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'http://localhost:1000/upload',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: (res) => {
+
+          if (res.err) {
+            $('#msg').html(res.err);
+           
+          }
+          else {
+            $('#msg').html(res.message);
+            $('#name').val('');
+            $('#image').val('');
+            
+          }
+
+
+        }
+
+
+      })
+
+    })
+  })
+</script>

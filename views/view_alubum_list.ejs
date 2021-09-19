@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gallery</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+ <h1> <a href="/album_name_list">Gallery</a></h1>
+  <div class="row">
+  
+    <% data.forEach((data,i)=>{ %>
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="../uploads/<%- data.album_image %>" alt="Lights" style="width:200px">
+          <div class="caption">
+          </div>
+        </a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+</body>
+</html>
